@@ -28,7 +28,7 @@ export default function LoginPage() {
   const isLoading = status === "loading" || status === "authenticated";
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-8">
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">

@@ -116,9 +116,9 @@ export function Timer() {
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-8">
+    <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
       {/* Session Type Selector */}
-      <div className="flex gap-2 bg-gray-800/50 p-1 rounded-xl">
+      <div className="flex flex-wrap justify-center gap-2 bg-gray-800/50 p-1 rounded-xl w-full sm:w-auto">
         {(["FOCUS", "SHORT_BREAK", "LONG_BREAK"] as const).map((type) => (
           <button
             key={type}
@@ -135,81 +135,83 @@ export function Timer() {
       </div>
 
       {/* Circular Progress Timer */}
-      <div className="relative">
-        <div
-          className={`relative w-80 h-80 rounded-full bg-gradient-to-br ${currentColor.bg} p-4`}
-        >
-          <svg
-            className="transform -rotate-90 w-full h-full"
-            viewBox="0 0 300 300"
+      <div className="w-full flex items-center justify-center">
+        <div className="relative inline-flex">
+          <div
+            className={`relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full bg-gradient-to-br ${currentColor.bg} p-3 sm:p-4`}
           >
-            {/* Background circle */}
-            <circle
-              cx="150"
-              cy="150"
-              r={radius}
-              stroke="currentColor"
-              strokeWidth="8"
-              fill="none"
-              className="text-gray-800"
-            />
-            {/* Progress circle */}
-            <motion.circle
-              cx="150"
-              cy="150"
-              r={radius}
-              stroke={currentColor.progress}
-              strokeWidth="8"
-              fill="none"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="drop-shadow-lg"
-            />
-          </svg>
+            <svg
+              className="transform -rotate-90 w-full h-full"
+              viewBox="0 0 300 300"
+            >
+              {/* Background circle */}
+              <circle
+                cx="150"
+                cy="150"
+                r={radius}
+                stroke="currentColor"
+                strokeWidth="8"
+                fill="none"
+                className="text-gray-800"
+              />
+              {/* Progress circle */}
+              <motion.circle
+                cx="150"
+                cy="150"
+                r={radius}
+                stroke={currentColor.progress}
+                strokeWidth="8"
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray={circumference}
+                initial={{ strokeDashoffset: circumference }}
+                animate={{ strokeDashoffset }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="drop-shadow-lg"
+              />
+            </svg>
 
-          {/* Timer Display */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={timeRemaining}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className={`text-6xl font-bold ${currentColor.text} mb-2`}
-              >
-                {formatTime(timeRemaining)}
-              </motion.div>
-            </AnimatePresence>
-            <p className={`text-lg ${currentColor.text} opacity-80`}>
-              {sessionLabels[sessionType]}
-            </p>
+            {/* Timer Display */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={timeRemaining}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`text-6xl font-bold ${currentColor.text} mb-2`}
+                >
+                  {formatTime(timeRemaining)}
+                </motion.div>
+              </AnimatePresence>
+              <p className={`text-lg ${currentColor.text} opacity-80`}>
+                {sessionLabels[sessionType]}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Pulsing ring when running */}
-        {isRunning && (
-          <motion.div
-            className={`absolute inset-0 rounded-full ${currentColor.ring}`}
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{ boxShadow: `0 0 0 4px currentColor` }}
-          />
-        )}
+          {/* Pulsing ring when running */}
+          {isRunning && (
+            <motion.div
+              className={`absolute inset-0 rounded-full ${currentColor.ring}`}
+              animate={{
+                scale: [1, 1.05, 1],
+                opacity: [0.5, 0.3, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              style={{ boxShadow: `0 0 0 4px currentColor` }}
+            />
+          )}
+        </div>
       </div>
 
       {/* Controls */}
-      <div className="flex gap-3 items-center">
+      <div className="flex flex-wrap items-center justify-center gap-3 w-full">
         {!isRunning && !isPaused && (
           <>
             <Button

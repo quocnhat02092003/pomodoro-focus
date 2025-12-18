@@ -104,7 +104,7 @@ export function SettingsPanel() {
               <Clock className="w-5 h-5 text-primary-400" />
               Timer Durations (minutes)
             </h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm text-gray-400 mb-2">
                   Focus
@@ -255,7 +255,7 @@ export function SettingsPanel() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-800">
+          <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-gray-800">
             <Button onClick={() => setIsOpen(false)} variant="ghost">
               Cancel
             </Button>

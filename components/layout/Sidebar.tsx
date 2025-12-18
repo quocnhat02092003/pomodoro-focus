@@ -194,7 +194,7 @@ export function Sidebar() {
       <Button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         variant="ghost"
-        className="fixed top-4 left-4 z-50 lg:hidden bg-gray-800/80 backdrop-blur-sm"
+        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 lg:hidden bg-gray-800/80 backdrop-blur-sm"
         size="sm"
       >
         <Menu className="w-5 h-5" />

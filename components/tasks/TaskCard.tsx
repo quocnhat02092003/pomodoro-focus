@@ -1,68 +1,79 @@
-'use client'
+"use client";
 
-import { Task } from '@/types/task'
-import { Card } from '@/components/ui/Card'
-import { PRIORITY_COLORS } from '@/lib/constants'
-import { useTaskStore } from '@/stores/task-store'
-import { useTimerStore } from '@/stores/timer-store'
-import { Play, Edit2, Trash2, CheckCircle2 } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { Task } from "@/types/task";
+import { Card } from "@/components/ui/Card";
+import { PRIORITY_COLORS } from "@/lib/constants";
+import { useTaskStore } from "@/stores/task-store";
+import { useTimerStore } from "@/stores/timer-store";
+import { Play, Edit2, Trash2, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface TaskCardProps {
-  task: Task
-  onEdit?: () => void
+  task: Task;
+  onEdit?: () => void;
 }
 
 export function TaskCard({ task, onEdit }: TaskCardProps) {
-  const { selectTask } = useTaskStore()
-  const { setSessionType, start } = useTimerStore()
+  const { selectTask } = useTaskStore();
+  const { setSessionType, start } = useTimerStore();
 
   const handleStartPomodoro = () => {
-    selectTask(task)
-    setSessionType('FOCUS')
-  }
+    selectTask(task);
+    setSessionType("FOCUS");
+  };
 
   const handleComplete = async () => {
     try {
       await fetch(`/api/tasks/${task.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'COMPLETED' }),
-      })
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "COMPLETED" }),
+      });
       // Refresh tasks
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
-      console.error('Error completing task:', error)
+      console.error("Error completing task:", error);
     }
-  }
+  };
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this task?')) return
-    
+    if (!confirm("Are you sure you want to delete this task?")) return;
+
     try {
       await fetch(`/api/tasks/${task.id}`, {
-        method: 'DELETE',
-      })
+        method: "DELETE",
+      });
       // Refresh tasks
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
-      console.error('Error deleting task:', error)
+      console.error("Error deleting task:", error);
     }
-  }
+  };
 
-  const progress = task.estimatedPomodoros > 0
-    ? (task.completedPomodoros / task.estimatedPomodoros) * 100
-    : 0
+  const progress =
+    task.estimatedPomodoros > 0
+      ? (task.completedPomodoros / task.estimatedPomodoros) * 100
+      : 0;
 
   return (
-    <Card className={`hover:bg-gray-800/50 transition-all ${task.status === 'COMPLETED' ? 'opacity-60' : ''}`}>
-      <div className="flex items-start justify-between gap-4">
+    <Card
+      className={`hover:bg-gray-800/50 transition-all ${
+        task.status === "COMPLETED" ? "opacity-60" : ""
+      }`}
+    >
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
-            {task.status === 'COMPLETED' && (
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            {task.status === "COMPLETED" && (
               <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
             )}
-            <h3 className={`text-lg font-semibold ${task.status === 'COMPLETED' ? 'line-through text-gray-500' : 'text-white'}`}>
+            <h3
+              className={`text-lg font-semibold ${
+                task.status === "COMPLETED"
+                  ? "line-through text-gray-500"
+                  : "text-white"
+              }`}
+            >
               {task.title}
             </h3>
             <span
@@ -118,8 +129,8 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
           )}
         </div>
 
-        <div className="flex gap-2 flex-shrink-0">
-          {task.status !== 'COMPLETED' && (
+        <div className="flex gap-2 flex-wrap justify-end md:justify-start flex-shrink-0">
+          {task.status !== "COMPLETED" && (
             <Button
               onClick={handleStartPomodoro}
               variant="ghost"
@@ -141,7 +152,7 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
               <Edit2 className="w-4 h-4" />
             </Button>
           )}
-          {task.status === 'COMPLETED' ? (
+          {task.status === "COMPLETED" ? (
             <Button
               onClick={handleDelete}
               variant="ghost"
@@ -165,6 +176,5 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
         </div>
       </div>
     </Card>
-  )
+  );
 }
-

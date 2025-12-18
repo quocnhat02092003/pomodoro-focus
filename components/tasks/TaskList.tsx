@@ -70,11 +70,11 @@ export function TaskList() {
     <>
       <Card>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl font-bold text-white">Tasks</h2>
             <Button
               onClick={handleCreateTask}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 w-full sm:w-auto"
             >
               <Plus className="w-4 h-4" />
               New Task
@@ -82,7 +82,7 @@ export function TaskList() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex gap-2 border-b border-gray-800">
+          <div className="flex flex-wrap gap-2 border-b border-gray-800">
             {(["ALL", "TODO", "IN_PROGRESS", "COMPLETED"] as const).map(
               (status) => (
                 <button

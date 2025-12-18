@@ -67,14 +67,14 @@ export default function DashboardPage() {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto p-8 space-y-8 flex-1">
+        <div className="relative max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 flex-1">
           {/* Header */}
           <div id="dashboard" className="scroll-mt-8">
             <div className="space-y-2">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
                 Welcome back!
               </h1>
-              <p className="text-gray-400 text-lg">
+              <p className="text-gray-400 text-base sm:text-lg">
                 Ready to focus? Let&apos;s get started.
               </p>
               {isMounted && (
@@ -85,9 +85,9 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Main Timer Section */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-5 sm:space-y-6">
               <div id="timer" className="scroll-mt-8">
                 <Card className="bg-gray-900/80 backdrop-blur-sm border-gray-800/50 shadow-2xl">
                   <CardContent className="py-12">
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                 <h2 className="text-lg font-semibold text-white px-2">
                   Entertainment & Relaxation
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                   <div id="breathing" className="scroll-mt-8">
                     <BreathingExercise />
                   </div>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Right Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               <div id="statistics" className="scroll-mt-8">
                 <Statistics />
               </div>
