@@ -23,6 +23,12 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          flowName: 'GeneralOAuthFlow',
+          redirect_uri: process.env.NEXTAUTH_URL + '/dashboard', 
+        },
+      },
     }),
   ],
   callbacks: {
