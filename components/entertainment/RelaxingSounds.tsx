@@ -122,14 +122,13 @@ export function RelaxingSounds() {
               <button
                 key={sound.id}
                 onClick={() => toggleSound(sound.id)}
-                className={`p-4 rounded-lg border transition-all ${
-                  isPlaying
+                className={`p-4 rounded-lg border transition-all ${isPlaying
                     ? "bg-primary-500/20 border-primary-500/50"
-                    : "bg-gray-800 border-gray-700 hover:border-gray-600"
-                }`}
+                    : "bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                  }`}
               >
                 <div className="text-3xl mb-2">{sound.emoji}</div>
-                <div className="text-sm text-white font-medium">
+                <div className="text-sm text-gray-800 dark:text-white font-medium">
                   {sound.name}
                 </div>
                 {isPlaying && (
@@ -150,8 +149,8 @@ export function RelaxingSounds() {
           })}
         </div>
 
-        <div className="flex items-center gap-3 pt-2 border-t border-gray-800">
-          <VolumeX className="w-4 h-4 text-gray-400" />
+        <div className="flex items-center gap-3 pt-2 border-t border-gray-200 dark:border-gray-800">
+          <VolumeX className="w-4 h-4 text-gray-500 dark:text-gray-400" />
           <input
             type="range"
             min="0"
@@ -161,8 +160,8 @@ export function RelaxingSounds() {
             onChange={(e) => setVolume(parseFloat(e.target.value))}
             className="flex-1"
           />
-          <Volume2 className="w-4 h-4 text-gray-400" />
-          <span className="text-xs text-gray-400 w-8">
+          <Volume2 className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+          <span className="text-xs text-gray-500 dark:text-gray-400 w-8">
             {Math.round(volume * 100)}%
           </span>
         </div>

@@ -58,7 +58,7 @@ export function TaskList() {
   if (isLoading) {
     return (
       <Card>
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-4"></div>
           Loading tasks...
         </div>
@@ -71,7 +71,7 @@ export function TaskList() {
       <Card>
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-2xl font-bold text-white">Tasks</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Tasks</h2>
             <Button
               onClick={handleCreateTask}
               className="flex items-center gap-2 w-full sm:w-auto"
@@ -82,17 +82,16 @@ export function TaskList() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2 border-b border-gray-800">
+          <div className="flex flex-wrap gap-2 border-b border-gray-200 dark:border-gray-800">
             {(["ALL", "TODO", "IN_PROGRESS", "COMPLETED"] as const).map(
               (status) => (
                 <button
                   key={status}
                   onClick={() => setFilter(status)}
-                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-                    filter === status
+                  className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${filter === status
                       ? "border-primary-600 text-primary-400"
-                      : "border-transparent text-gray-400 hover:text-white"
-                  }`}
+                      : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
+                    }`}
                 >
                   {status === "ALL" ? "All" : status.replace("_", " ")}
                 </button>
@@ -101,7 +100,7 @@ export function TaskList() {
           </div>
 
           {filteredTasks.length === 0 ? (
-            <div className="text-center py-12 text-gray-400">
+            <div className="text-center py-12 text-gray-500 dark:text-gray-400">
               <p className="mb-2">
                 {filter === "ALL"
                   ? "No tasks yet. Create your first task to get started!"

@@ -85,19 +85,19 @@ export function Timer() {
     FOCUS: {
       bg: "from-red-500/20 to-orange-500/20",
       ring: "ring-red-500/50",
-      text: "text-red-400",
+      text: "text-red-600 dark:text-red-400",
       progress: "#ef4444",
     },
     SHORT_BREAK: {
       bg: "from-green-500/20 to-emerald-500/20",
       ring: "ring-green-500/50",
-      text: "text-green-400",
+      text: "text-green-600 dark:text-green-400",
       progress: "#10b981",
     },
     LONG_BREAK: {
       bg: "from-blue-500/20 to-cyan-500/20",
       ring: "ring-blue-500/50",
-      text: "text-blue-400",
+      text: "text-blue-600 dark:text-blue-400",
       progress: "#3b82f6",
     },
   };
@@ -118,16 +118,15 @@ export function Timer() {
   return (
     <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
       {/* Session Type Selector */}
-      <div className="flex flex-wrap justify-center gap-2 bg-gray-800/50 p-1 rounded-xl w-full sm:w-auto">
+      <div className="flex flex-wrap justify-center gap-2 bg-gray-300/50 dark:bg-gray-800/50 p-1 rounded-xl w-full sm:w-auto">
         {(["FOCUS", "SHORT_BREAK", "LONG_BREAK"] as const).map((type) => (
           <button
             key={type}
             onClick={() => setSessionType(type)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              sessionType === type
-                ? "bg-primary-600 text-white shadow-lg shadow-primary-600/50"
-                : "text-gray-400 hover:text-white hover:bg-gray-700/50"
-            }`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${sessionType === type
+              ? "bg-primary-600 text-white shadow-lg shadow-primary-600/50"
+              : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/50 dark:hover:bg-gray-700/50"
+              }`}
           >
             {sessionLabels[type]}
           </button>
@@ -152,7 +151,7 @@ export function Timer() {
                 stroke="currentColor"
                 strokeWidth="8"
                 fill="none"
-                className="text-gray-800"
+                className="text-gray-300 dark:text-gray-800"
               />
               {/* Progress circle */}
               <motion.circle

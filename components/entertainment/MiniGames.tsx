@@ -67,10 +67,10 @@ function TicTacToe() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <div className="text-sm text-gray-400">Score</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">Score</div>
         <div className="flex gap-4 text-sm">
           <span className="text-blue-400">X: {score.X}</span>
-          <span className="text-gray-400">Ties: {score.ties}</span>
+          <span className="text-gray-500 dark:text-gray-400">Ties: {score.ties}</span>
           <span className="text-red-400">O: {score.O}</span>
         </div>
       </div>
@@ -81,9 +81,9 @@ function TicTacToe() {
             Winner: {winner}!
           </p>
         ) : isDraw ? (
-          <p className="text-lg font-bold text-gray-400">It&apos;s a draw!</p>
+          <p className="text-lg font-bold text-gray-500 dark:text-gray-400">It&apos;s a draw!</p>
         ) : (
-          <p className="text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400">
             Next:{" "}
             <span className={isXNext ? "text-blue-400" : "text-red-400"}>
               {isXNext ? "X" : "O"}
@@ -98,13 +98,12 @@ function TicTacToe() {
             key={index}
             onClick={() => handleClick(index)}
             disabled={!!cell || !!winner}
-            className={`aspect-square bg-gray-800 rounded-lg text-2xl font-bold transition-all ${
-              cell === "X"
+            className={`aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg text-2xl font-bold transition-all ${cell === "X"
                 ? "text-blue-400 hover:bg-blue-500/20"
                 : cell === "O"
-                ? "text-red-400 hover:bg-red-500/20"
-                : "hover:bg-gray-700 text-transparent"
-            } disabled:cursor-not-allowed`}
+                  ? "text-red-400 hover:bg-red-500/20"
+                  : "hover:bg-gray-300 dark:hover:bg-gray-700 text-transparent"
+              } disabled:cursor-not-allowed`}
           >
             {cell || "·"}
           </button>
@@ -166,13 +165,13 @@ function MemoryGame() {
     <div className="space-y-4">
       {!gameStarted ? (
         <div className="text-center py-8">
-          <p className="text-gray-400 mb-4">Match all pairs!</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">Match all pairs!</p>
           <Button onClick={initializeGame}>Start Game</Button>
         </div>
       ) : (
         <>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-400">Moves: {moves}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">Moves: {moves}</span>
             {isComplete && (
               <span className="text-sm text-green-400 font-bold">
                 Completed!
@@ -188,11 +187,10 @@ function MemoryGame() {
                   key={index}
                   onClick={() => handleCardClick(index)}
                   disabled={matched.includes(index)}
-                  className={`aspect-square bg-gray-800 rounded-lg text-xl font-bold transition-all ${
-                    isFlipped
+                  className={`aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg text-xl font-bold transition-all ${isFlipped
                       ? "bg-primary-600 text-white"
-                      : "bg-gray-700 hover:bg-gray-600 text-transparent"
-                  } disabled:opacity-50`}
+                      : "bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-transparent"
+                    } disabled:opacity-50`}
                 >
                   {isFlipped ? card : "?"}
                 </button>
@@ -229,21 +227,19 @@ export function MiniGames() {
         <div className="flex gap-2">
           <button
             onClick={() => setGameType("tic-tac-toe")}
-            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${
-              gameType === "tic-tac-toe"
+            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${gameType === "tic-tac-toe"
                 ? "bg-primary-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-            }`}
+                : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`}
           >
             Tic-Tac-Toe
           </button>
           <button
             onClick={() => setGameType("memory")}
-            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${
-              gameType === "memory"
+            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${gameType === "memory"
                 ? "bg-primary-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-            }`}
+                : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700"
+              }`}
           >
             Memory
           </button>

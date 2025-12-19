@@ -87,9 +87,9 @@ export function PomodoroHistory() {
       </CardHeader>
       <CardContent>
         {isLoading ? (
-          <div className="text-center py-8 text-gray-400">Loading...</div>
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">Loading...</div>
         ) : sessions.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
             <History className="w-12 h-12 mx-auto mb-4 opacity-50" />
             <p>No sessions yet</p>
             <p className="text-sm mt-2">

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
-import { Settings, Volume2, Bell, Clock, Zap } from "lucide-react";
+import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
+import { Settings, Volume2, Bell, Clock, Zap, Palette } from "lucide-react";
 import { useTimerStore } from "@/stores/timer-store";
 import { useSound } from "@/hooks/useSound";
 
@@ -85,7 +86,7 @@ export function SettingsPanel() {
       <Button
         onClick={() => setIsOpen(true)}
         variant="ghost"
-        className="fixed bottom-6 right-6 z-40 rounded-full w-14 h-14 shadow-lg bg-gray-800 hover:bg-gray-700"
+        className="fixed bottom-6 right-6 z-40 rounded-full w-14 h-14 shadow-lg bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
         title="Settings"
       >
         <Settings className="w-6 h-6" />
@@ -100,13 +101,13 @@ export function SettingsPanel() {
         <div className="space-y-6">
           {/* Timer Durations */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-primary-400" />
               Timer Durations (minutes)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">
                   Focus
                 </label>
                 <input
@@ -120,11 +121,11 @@ export function SettingsPanel() {
                       focusDuration: parseInt(e.target.value) || 25,
                     })
                   }
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-800 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">
                   Short Break
                 </label>
                 <input
@@ -138,11 +139,11 @@ export function SettingsPanel() {
                       shortBreakDuration: parseInt(e.target.value) || 5,
                     })
                   }
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-800 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">
                   Long Break
                 </label>
                 <input
@@ -156,7 +157,7 @@ export function SettingsPanel() {
                       longBreakDuration: parseInt(e.target.value) || 15,
                     })
                   }
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white"
+                  className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-800 dark:text-white"
                 />
               </div>
             </div>
@@ -164,13 +165,13 @@ export function SettingsPanel() {
 
           {/* Sound & Notifications */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <Volume2 className="w-5 h-5 text-primary-400" />
               Sound & Notifications
             </h3>
             <div className="space-y-3">
-              <label className="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
-                <span className="text-white">Sound Notifications</span>
+              <label className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <span className="text-gray-800 dark:text-white">Sound Notifications</span>
                 <input
                   type="checkbox"
                   checked={settings.soundEnabled}
@@ -190,8 +191,8 @@ export function SettingsPanel() {
                   Test Sound
                 </Button>
               )}
-              <label className="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
-                <span className="text-white">Browser Notifications</span>
+              <label className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <span className="text-gray-800 dark:text-white">Browser Notifications</span>
                 <input
                   type="checkbox"
                   checked={settings.notificationsEnabled}
@@ -207,17 +208,28 @@ export function SettingsPanel() {
             </div>
           </div>
 
+          {/* Appearance */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+              <Palette className="w-5 h-5 text-primary-400" />
+              Appearance
+            </h3>
+            <div className="space-y-3">
+              <ThemeSwitch />
+            </div>
+          </div>
+
           {/* Auto Start */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
               <Zap className="w-5 h-5 text-primary-400" />
               Auto Start
             </h3>
             <div className="space-y-3">
-              <label className="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+              <label className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                 <div>
-                  <span className="text-white block">Auto-start Breaks</span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-gray-800 dark:text-white block">Auto-start Breaks</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     Automatically start break after focus session
                   </span>
                 </div>
@@ -233,10 +245,10 @@ export function SettingsPanel() {
                   className="w-5 h-5 rounded"
                 />
               </label>
-              <label className="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+              <label className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                 <div>
-                  <span className="text-white block">Auto-start Pomodoros</span>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-gray-800 dark:text-white block">Auto-start Pomodoros</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     Automatically start focus after break
                   </span>
                 </div>
@@ -255,7 +267,7 @@ export function SettingsPanel() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-gray-800">
+          <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
             <Button onClick={() => setIsOpen(false)} variant="ghost">
               Cancel
             </Button>

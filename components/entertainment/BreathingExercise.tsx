@@ -124,11 +124,10 @@ export function BreathingExercise() {
               <button
                 key={key}
                 onClick={() => setPreset(key)}
-                className={`px-3 py-1 text-sm rounded-lg transition-colors ${
-                  preset === key
+                className={`px-3 py-1 text-sm rounded-lg transition-colors ${preset === key
                     ? 'bg-primary-600 text-white'
-                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                }`}
+                    : 'bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'
+                  }`}
               >
                 {key}
               </button>
@@ -155,7 +154,7 @@ export function BreathingExercise() {
         </div>
 
         {isActive && cycle > 0 && (
-          <div className="text-center text-gray-400 text-sm">
+          <div className="text-center text-gray-500 dark:text-gray-400 text-sm">
             Cycle {cycle} completed
           </div>
         )}
@@ -180,7 +179,7 @@ export function BreathingExercise() {
           )}
         </div>
 
-        <div className="text-xs text-gray-400 space-y-1">
+        <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
           <p>• Follow the breathing pattern</p>
           <p>• Inhale through your nose</p>
           <p>• Exhale through your mouth</p>

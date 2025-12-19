@@ -194,7 +194,7 @@ export function Sidebar() {
       <Button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         variant="ghost"
-        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 lg:hidden bg-gray-800/80 backdrop-blur-sm"
+        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 lg:hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm"
         size="sm"
       >
         <Menu className="w-5 h-5" />
@@ -224,7 +224,7 @@ export function Sidebar() {
             exit={{ x: -300 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className={cn(
-              "fixed left-0 top-0 h-screen bg-gray-900/95 backdrop-blur-lg border-r border-gray-800 z-50 flex flex-col",
+              "fixed left-0 top-0 h-screen bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-r border-gray-200 dark:border-gray-800 z-50 flex flex-col",
               "lg:translate-x-0",
               isCollapsed ? "w-20" : "w-72"
             )}
@@ -232,14 +232,14 @@ export function Sidebar() {
             {/* Header */}
             <div
               className={cn(
-                "flex items-center justify-between border-b border-gray-800 flex-shrink-0",
+                "flex items-center justify-between border-b border-gray-200 dark:border-gray-800 flex-shrink-0",
                 isCollapsed ? "p-4" : "p-6"
               )}
             >
               {!isCollapsed && (
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🍅</span>
-                  <h2 className="text-xl font-bold text-white">
+                  <h2 className="text-xl font-bold text-gray-800 dark:text-white">
                     Pomodoro Focus
                   </h2>
                 </div>
@@ -280,7 +280,7 @@ export function Sidebar() {
                     <div
                       key={item.id}
                       className={cn(
-                        "h-px bg-gray-800 my-4",
+                        "h-px bg-gray-200 dark:bg-gray-800 my-4",
                         isCollapsed && "mx-2"
                       )}
                     />
@@ -301,14 +301,14 @@ export function Sidebar() {
                         : "gap-3 px-4 py-3 text-left",
                       isActive
                         ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
-                        : "text-gray-300 hover:bg-gray-800 hover:text-white",
+                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white",
                       isMainSection && "font-medium"
                     )}
                     title={isCollapsed ? item.label : undefined}
                   >
                     <span
                       className={cn(
-                        isActive ? "text-white" : "text-gray-400",
+                        isActive ? "text-white" : "text-gray-500 dark:text-gray-400",
                         isCollapsed ? "flex-shrink-0" : ""
                       )}
                     >
@@ -324,7 +324,7 @@ export function Sidebar() {
 
             {/* Footer */}
             {!isCollapsed && (
-              <div className="p-4 border-t border-gray-800 flex-shrink-0 space-y-4">
+              <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex-shrink-0 space-y-4">
                 <div className="flex items-center gap-3">
                   {profileImage ? (
                     <Image
@@ -332,7 +332,7 @@ export function Sidebar() {
                       alt={displayName}
                       width={40}
                       height={40}
-                      className="w-10 h-10 rounded-full object-cover border border-gray-700"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-300 dark:border-gray-700"
                     />
                   ) : (
                     <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold">
@@ -340,10 +340,10 @@ export function Sidebar() {
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-white truncate">
                       {displayName}
                     </p>
-                    <p className="text-xs text-gray-400 truncate">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                       {userEmail}
                     </p>
                   </div>
@@ -352,13 +352,13 @@ export function Sidebar() {
                   onClick={handleAuthAction}
                   variant="ghost"
                   size="sm"
-                  className="w-full flex items-center justify-center border border-gray-800 text-gray-300 hover:text-white"
+                  className="w-full flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                   title={authTitle}
                 >
                   <AuthIcon className="w-4 h-4 mr-2" />
                   {authLabel}
                 </Button>
-                <div className="text-xs text-gray-500 text-center">
+                <div className="text-xs text-gray-400 dark:text-gray-500 text-center">
                   Version 1.0.0
                 </div>
               </div>
@@ -366,7 +366,7 @@ export function Sidebar() {
 
             {/* Collapse/Expand Button */}
             {isCollapsed && (
-              <div className="p-4 border-t border-gray-800 flex-shrink-0 space-y-2">
+              <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex-shrink-0 space-y-2">
                 <Button
                   onClick={() => setIsCollapsed(false)}
                   variant="ghost"
@@ -380,7 +380,7 @@ export function Sidebar() {
                   onClick={handleAuthAction}
                   variant="ghost"
                   size="sm"
-                  className="w-full justify-center text-gray-300 hover:text-white"
+                  className="w-full justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                   title={authTitle}
                 >
                   <AuthIcon className="w-4 h-4" />
@@ -393,3 +393,4 @@ export function Sidebar() {
     </>
   );
 }
+

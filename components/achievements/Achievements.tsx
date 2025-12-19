@@ -67,30 +67,26 @@ export function Achievements() {
           {achievements.map((achievement) => (
             <div
               key={achievement.code}
-              className={`p-4 rounded-lg border transition-all ${
-                achievement.unlocked
+              className={`p-4 rounded-lg border transition-all ${achievement.unlocked
                   ? "bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-yellow-500/30"
-                  : "bg-gray-800/50 border-gray-700 opacity-60"
-              }`}
+                  : "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 opacity-60"
+                }`}
             >
               <div
-                className={`mb-2 ${
-                  achievement.unlocked ? "text-yellow-400" : "text-gray-500"
-                }`}
+                className={`mb-2 ${achievement.unlocked ? "text-yellow-400" : "text-gray-400 dark:text-gray-500"
+                  }`}
               >
                 {achievement.icon}
               </div>
               <h4
-                className={`font-semibold text-sm mb-1 ${
-                  achievement.unlocked ? "text-white" : "text-gray-400"
-                }`}
+                className={`font-semibold text-sm mb-1 ${achievement.unlocked ? "text-gray-800 dark:text-white" : "text-gray-500 dark:text-gray-400"
+                  }`}
               >
                 {achievement.name}
               </h4>
               <p
-                className={`text-xs ${
-                  achievement.unlocked ? "text-gray-300" : "text-gray-500"
-                }`}
+                className={`text-xs ${achievement.unlocked ? "text-gray-600 dark:text-gray-300" : "text-gray-400 dark:text-gray-500"
+                  }`}
               >
                 {achievement.description}
               </p>

@@ -23,24 +23,18 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      authorization: {
-        params: {
-          flowName: 'GeneralOAuthFlow',
-          redirect_uri: process.env.NEXTAUTH_URL + '/dashboard', 
-        },
-      },
     }),
   ],
   callbacks: {
     async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id
-        
+
         // Fetch Spotify profile if exists
         const spotifyProfile = await prisma.spotifyProfile.findUnique({
           where: { userId: user.id },
         })
-        
+
         if (spotifyProfile) {
           session.spotify = {
             id: spotifyProfile.spotifyId,
@@ -91,10 +85,23 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/login',
+    error: '/login', // Redirect to login on error
   },
   session: {
     strategy: 'database',
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: true, // Enable debug logs
+  logger: {
+    error(code, metadata) {
+      console.error('NextAuth Error:', code, metadata)
+    },
+    warn(code) {
+      console.warn('NextAuth Warning:', code)
+    },
+    debug(code, metadata) {
+      console.log('NextAuth Debug:', code, metadata)
+    },
+  },
 }
 

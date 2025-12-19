@@ -27,7 +27,7 @@ export function SpotifyPlayer() {
   if (!isAuthenticated) {
     return (
       <Card className="text-center space-y-4">
-        <p className="text-gray-300">
+        <p className="text-gray-600 dark:text-gray-300">
           Sign in to connect Spotify and unlock curated focus playlists.
         </p>
         <Button
@@ -44,7 +44,7 @@ export function SpotifyPlayer() {
   if (!isConnected) {
     return (
       <Card>
-        <p className="text-gray-400 text-center">
+        <p className="text-gray-500 dark:text-gray-400 text-center">
           Connect Spotify to play music during your focus sessions
         </p>
       </Card>
@@ -66,10 +66,10 @@ export function SpotifyPlayer() {
               />
             )}
             <div className="flex-1 min-w-0">
-              <p className="text-white font-medium truncate">
+              <p className="text-gray-800 dark:text-white font-medium truncate">
                 {currentTrack.name}
               </p>
-              <p className="text-gray-400 text-sm truncate">
+              <p className="text-gray-500 dark:text-gray-400 text-sm truncate">
                 {currentTrack.artists.map((a) => a.name).join(", ")}
               </p>
             </div>
@@ -88,7 +88,7 @@ export function SpotifyPlayer() {
         )}
 
         <div className="flex items-center gap-2">
-          <Volume2 className="w-4 h-4 text-gray-400" />
+          <Volume2 className="w-4 h-4 text-gray-500 dark:text-gray-400" />
           <input
             type="range"
             min="0"
@@ -97,13 +97,13 @@ export function SpotifyPlayer() {
             onChange={(e) => setVolume(Number(e.target.value))}
             className="flex-1"
           />
-          <span className="text-sm text-gray-400 w-12 text-right">
+          <span className="text-sm text-gray-500 dark:text-gray-400 w-12 text-right">
             {volume}%
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-gray-800">
-          <label className="flex items-center gap-2 text-sm text-gray-400">
+        <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-800">
+          <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <input
               type="checkbox"
               checked={autoPlay}
@@ -112,7 +112,7 @@ export function SpotifyPlayer() {
             />
             Auto-play on start
           </label>
-          <label className="flex items-center gap-2 text-sm text-gray-400">
+          <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <input
               type="checkbox"
               checked={autoPause}
@@ -126,3 +126,4 @@ export function SpotifyPlayer() {
     </Card>
   );
 }
+

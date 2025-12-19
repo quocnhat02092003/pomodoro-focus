@@ -2,20 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode variables - darker for better visibility */
 :root {
+  --foreground-rgb: 17, 24, 39;
+  --background-start-rgb: 241, 245, 249;
+  --background-end-rgb: 226, 232, 240;
+  --card-bg: 255, 255, 255;
+  --card-border: 203, 213, 225;
+  --input-bg: 241, 245, 249;
+  --input-border: 148, 163, 184;
+}
+
+/* Dark mode variables */
+.dark {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  --background-start-rgb: 3, 7, 18;
+  --background-end-rgb: 17, 24, 39;
+  --card-bg: 31, 41, 55;
+  --card-border: 55, 65, 81;
+  --input-bg: 31, 41, 55;
+  --input-border: 75, 85, 99;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 @layer utilities {
@@ -34,26 +48,47 @@ body {
   @apply transition-colors duration-200;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Light mode */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-900;
+  background: #f3f4f6;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-700 rounded-full;
+  background: #d1d5db;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-600;
+  background: #9ca3af;
 }
 
-/* Glass morphism effect */
+/* Custom scrollbar - Dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+/* Glass morphism effect - Light mode */
 .glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Glass morphism effect - Dark mode */
+.dark .glass {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -70,10 +105,12 @@ body {
     transform: scale(0.95);
     opacity: 1;
   }
+
   50% {
     transform: scale(1);
     opacity: 0.7;
   }
+
   100% {
     transform: scale(0.95);
     opacity: 1;
@@ -83,4 +120,3 @@ body {
 .animate-pulse-ring {
   animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-

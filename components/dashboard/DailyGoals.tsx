@@ -18,7 +18,7 @@ export function DailyGoals() {
   ])
 
   const toggleGoal = (id: string) => {
-    setGoals(goals.map(goal => 
+    setGoals(goals.map(goal =>
       goal.id === id ? { ...goal, completed: !goal.completed } : goal
     ))
   }
@@ -38,12 +38,12 @@ export function DailyGoals() {
         {/* Progress */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-400">Progress</span>
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Progress</span>
+            <span className="text-sm font-medium text-gray-800 dark:text-white">
               {completedCount} / {goals.length}
             </span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-2">
+          <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
             <div
               className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
@@ -57,11 +57,10 @@ export function DailyGoals() {
             <button
               key={goal.id}
               onClick={() => toggleGoal(goal.id)}
-              className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
-                goal.completed
+              className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${goal.completed
                   ? 'bg-green-500/10 border border-green-500/30'
-                  : 'bg-gray-800/50 border border-gray-700 hover:border-gray-600'
-              }`}
+                  : 'bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                }`}
             >
               {goal.completed ? (
                 <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -69,9 +68,8 @@ export function DailyGoals() {
                 <Circle className="w-5 h-5 text-gray-400 flex-shrink-0" />
               )}
               <span
-                className={`text-sm flex-1 text-left ${
-                  goal.completed ? 'line-through text-gray-400' : 'text-white'
-                }`}
+                className={`text-sm flex-1 text-left ${goal.completed ? 'line-through text-gray-400' : 'text-gray-800 dark:text-white'
+                  }`}
               >
                 {goal.text}
               </span>

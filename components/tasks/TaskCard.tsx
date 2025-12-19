@@ -57,9 +57,8 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
 
   return (
     <Card
-      className={`hover:bg-gray-800/50 transition-all ${
-        task.status === "COMPLETED" ? "opacity-60" : ""
-      }`}
+      className={`hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all ${task.status === "COMPLETED" ? "opacity-60" : ""
+        }`}
     >
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="flex-1">
@@ -68,11 +67,10 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
               <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
             )}
             <h3
-              className={`text-lg font-semibold ${
-                task.status === "COMPLETED"
+              className={`text-lg font-semibold ${task.status === "COMPLETED"
                   ? "line-through text-gray-500"
-                  : "text-white"
-              }`}
+                  : "text-gray-800 dark:text-white"
+                }`}
             >
               {task.title}
             </h3>
@@ -85,13 +83,13 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
             >
               {task.priority}
             </span>
-            <span className="px-2 py-1 text-xs font-medium rounded bg-gray-700 text-gray-300">
+            <span className="px-2 py-1 text-xs font-medium rounded bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
               {task.status}
             </span>
           </div>
 
           {task.description && (
-            <p className="text-gray-400 text-sm mb-3">{task.description}</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-3">{task.description}</p>
           )}
 
           {task.tags && task.tags.length > 0 && (
@@ -113,13 +111,13 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
 
           {task.estimatedPomodoros > 0 && (
             <div className="mb-3">
-              <div className="flex items-center justify-between text-sm text-gray-400 mb-1">
+              <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-1">
                 <span>Progress</span>
                 <span>
                   {task.completedPomodoros} / {task.estimatedPomodoros}
                 </span>
               </div>
-              <div className="w-full bg-gray-800 rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
                 <div
                   className="bg-primary-600 h-2 rounded-full transition-all"
                   style={{ width: `${progress}%` }}

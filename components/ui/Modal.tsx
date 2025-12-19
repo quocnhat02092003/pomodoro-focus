@@ -54,11 +54,11 @@ export function Modal({
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className={`bg-gray-900 rounded-xl shadow-2xl border border-gray-800 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto pointer-events-auto`}
+              className={`bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-slate-300 dark:border-gray-800 w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto pointer-events-auto`}
             >
               {title && (
-                <div className="flex items-center justify-between p-6 border-b border-gray-800">
-                  <h2 className="text-xl font-semibold text-white">{title}</h2>
+                <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-gray-800">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h2>
                   <Button
                     onClick={onClose}
                     variant="ghost"
@@ -77,3 +77,4 @@ export function Modal({
     </AnimatePresence>
   );
 }
+

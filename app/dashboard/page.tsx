@@ -55,7 +55,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex lg:pl-72">
+    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex lg:pl-72">
       {/* Sidebar Menu */}
       <Sidebar />
 
@@ -71,14 +71,14 @@ export default function DashboardPage() {
           {/* Header */}
           <div id="dashboard" className="scroll-mt-8">
             <div className="space-y-2">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-700 to-gray-600 dark:from-white dark:via-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
                 Welcome back!
               </h1>
-              <p className="text-gray-400 text-base sm:text-lg">
+              <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg">
                 Ready to focus? Let&apos;s get started.
               </p>
               {isMounted && (
-                <p className="text-sm text-primary-300 font-medium">
+                <p className="text-sm text-primary-600 font-medium">
                   Giờ Việt Nam: {vnNow}
                 </p>
               )}
@@ -89,7 +89,7 @@ export default function DashboardPage() {
             {/* Main Timer Section */}
             <div className="lg:col-span-2 space-y-5 sm:space-y-6">
               <div id="timer" className="scroll-mt-8">
-                <Card className="bg-gray-900/80 backdrop-blur-sm border-gray-800/50 shadow-2xl">
+                <Card className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-gray-200 dark:border-gray-800/50 shadow-2xl">
                   <CardContent className="py-12">
                     <Timer />
                   </CardContent>
@@ -105,16 +105,16 @@ export default function DashboardPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <h3 className="text-xl font-semibold text-white mb-2">
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                       {selectedTask.title}
                     </h3>
                     {selectedTask.description && (
-                      <p className="text-gray-300">
+                      <p className="text-gray-600 dark:text-gray-300">
                         {selectedTask.description}
                       </p>
                     )}
                     {selectedTask.estimatedPomodoros > 0 && (
-                      <div className="mt-4 flex items-center gap-2 text-sm text-gray-400">
+                      <div className="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                         <Sparkles className="w-4 h-4" />
                         <span>
                           {selectedTask.completedPomodoros} /{" "}
@@ -132,7 +132,7 @@ export default function DashboardPage() {
 
               {/* Entertainment Section */}
               <div id="entertainment" className="scroll-mt-8 space-y-4">
-                <h2 className="text-lg font-semibold text-white px-2">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white px-2">
                   Entertainment & Relaxation
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
@@ -146,7 +146,7 @@ export default function DashboardPage() {
                     <JokesQuotes />
                   </div>
                   <div id="sounds" className="scroll-mt-8">
-                  <Statistics />
+                    <Statistics />
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export default function DashboardPage() {
             {/* Right Sidebar */}
             <div className="space-y-5 sm:space-y-6">
               <div id="statistics" className="scroll-mt-8">
-                
+
                 <RelaxingSounds />
               </div>
               <DailyGoals />

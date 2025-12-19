@@ -20,10 +20,18 @@ export function FocusMode() {
 
   if (!focusMode) return null;
 
-  const sessionColors = {
-    FOCUS: "from-red-950 via-gray-950 to-gray-950",
-    SHORT_BREAK: "from-green-950 via-gray-950 to-gray-950",
-    LONG_BREAK: "from-blue-950 via-gray-950 to-gray-950",
+  // Light mode colors (brighter, softer gradients)
+  const sessionColorsLight = {
+    FOCUS: "from-red-100 via-orange-50 to-slate-100",
+    SHORT_BREAK: "from-green-100 via-emerald-50 to-slate-100",
+    LONG_BREAK: "from-blue-100 via-cyan-50 to-slate-100",
+  };
+
+  // Dark mode colors (darker, richer gradients)
+  const sessionColorsDark = {
+    FOCUS: "dark:from-red-950 dark:via-gray-950 dark:to-gray-950",
+    SHORT_BREAK: "dark:from-green-950 dark:via-gray-950 dark:to-gray-950",
+    LONG_BREAK: "dark:from-blue-950 dark:via-gray-950 dark:to-gray-950",
   };
 
   return (
@@ -33,13 +41,13 @@ export function FocusMode() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className={`fixed inset-0 z-50 bg-gradient-to-br ${sessionColors[sessionType]} flex items-center justify-center`}
+          className={`fixed inset-0 z-50 bg-gradient-to-br ${sessionColorsLight[sessionType]} ${sessionColorsDark[sessionType]} flex items-center justify-center`}
         >
           {/* Exit button */}
           <Button
             onClick={() => setFocusMode(false)}
             variant="ghost"
-            className="absolute top-6 right-6 text-gray-400 hover:text-white"
+            className="absolute top-6 right-6 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
           >
             <X className="w-6 h-6" />
           </Button>
@@ -50,7 +58,7 @@ export function FocusMode() {
           </div>
 
           {/* Keyboard hint */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-gray-500 text-sm">
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-gray-600 dark:text-gray-500 text-sm">
             Press ESC to exit focus mode
           </div>
         </motion.div>
