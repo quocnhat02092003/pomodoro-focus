@@ -146,7 +146,7 @@ export default function DashboardPage() {
                     <JokesQuotes />
                   </div>
                   <div id="sounds" className="scroll-mt-8">
-                    <RelaxingSounds />
+                  <Statistics />
                   </div>
                 </div>
               </div>
@@ -155,7 +155,8 @@ export default function DashboardPage() {
             {/* Right Sidebar */}
             <div className="space-y-5 sm:space-y-6">
               <div id="statistics" className="scroll-mt-8">
-                <Statistics />
+                
+                <RelaxingSounds />
               </div>
               <DailyGoals />
               <div id="history" className="scroll-mt-8">

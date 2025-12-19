@@ -17,37 +17,37 @@ const SOUNDS: Sound[] = [
     id: "rain",
     name: "Rain",
     emoji: "🌧️",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    url: "https://cdn.pixabay.com/audio/2025/11/29/audio_04e9ec42a3.mp3",
   },
   {
     id: "ocean",
     name: "Ocean Waves",
     emoji: "🌊",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    url: "https://cdn.pixabay.com/audio/2024/10/12/audio_7dd52a2e33.mp3",
   },
   {
     id: "forest",
     name: "Forest",
     emoji: "🌲",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    url: "https://cdn.pixabay.com/audio/2025/02/03/audio_7599bcb342.mp3",
   },
   {
     id: "fireplace",
     name: "Fireplace",
     emoji: "🔥",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    url: "https://cdn.pixabay.com/audio/2021/08/04/audio_d412a79df9.mp3",
   },
   {
     id: "birds",
     name: "Birds",
     emoji: "🐦",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+    url: "https://cdn.pixabay.com/audio/2022/02/10/audio_7a07ee0e79.mp3",
   },
   {
     id: "cafe",
     name: "Coffee Shop",
     emoji: "☕",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+    url: "https://cdn.pixabay.com/audio/2022/02/07/audio_6872fe6dc2.mp3",
   },
 ];
 
