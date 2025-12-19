@@ -15,8 +15,10 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: SPOTIFY_SCOPES.join(' '),
+          redirect_uri: process.env.NEXTAUTH_URL + '/api/auth/callback/spotify',
         },
       },
+
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
