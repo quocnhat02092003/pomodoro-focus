@@ -15,10 +15,8 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope: SPOTIFY_SCOPES.join(' '),
-          redirect_uri: process.env.NEXTAUTH_URL + '/api/auth/callback/spotify',
         },
       },
-
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -49,36 +47,52 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile }) {
       if (account?.provider === 'spotify' && account.access_token && account.refresh_token) {
         const spotifyProfile = profile as SpotifyProfile | undefined
-        if (!spotifyProfile?.id) {
+        if (!spotifyProfile?.id || !user.id) {
           return true
         }
 
-        await prisma.spotifyProfile.upsert({
-          where: { userId: user.id },
-          create: {
-            userId: user.id,
-            spotifyId: spotifyProfile.id,
-            displayName: spotifyProfile.display_name ?? null,
-            email: spotifyProfile.email ?? null,
-            image: spotifyProfile.images?.[0]?.url ?? null,
-            accessToken: account.access_token,
-            refreshToken: account.refresh_token,
-            tokenExpiresAt: account.expires_at
-              ? new Date(account.expires_at * 1000)
-              : new Date(Date.now() + 3600 * 1000),
-          },
-          update: {
-            spotifyId: spotifyProfile.id,
-            displayName: spotifyProfile.display_name ?? null,
-            email: spotifyProfile.email ?? null,
-            image: spotifyProfile.images?.[0]?.url ?? null,
-            accessToken: account.access_token,
-            refreshToken: account.refresh_token,
-            tokenExpiresAt: account.expires_at
-              ? new Date(account.expires_at * 1000)
-              : new Date(Date.now() + 3600 * 1000),
-          },
-        })
+        try {
+          // Ensure user exists before creating SpotifyProfile
+          const existingUser = await prisma.user.findUnique({
+            where: { id: user.id },
+          })
+
+          if (!existingUser) {
+            // User will be created by the adapter, SpotifyProfile will be created on next login
+            console.log('User not yet created, skipping SpotifyProfile creation')
+            return true
+          }
+
+          await prisma.spotifyProfile.upsert({
+            where: { userId: user.id },
+            create: {
+              userId: user.id,
+              spotifyId: spotifyProfile.id,
+              displayName: spotifyProfile.display_name ?? null,
+              email: spotifyProfile.email ?? null,
+              image: spotifyProfile.images?.[0]?.url ?? null,
+              accessToken: account.access_token,
+              refreshToken: account.refresh_token,
+              tokenExpiresAt: account.expires_at
+                ? new Date(account.expires_at * 1000)
+                : new Date(Date.now() + 3600 * 1000),
+            },
+            update: {
+              spotifyId: spotifyProfile.id,
+              displayName: spotifyProfile.display_name ?? null,
+              email: spotifyProfile.email ?? null,
+              image: spotifyProfile.images?.[0]?.url ?? null,
+              accessToken: account.access_token,
+              refreshToken: account.refresh_token,
+              tokenExpiresAt: account.expires_at
+                ? new Date(account.expires_at * 1000)
+                : new Date(Date.now() + 3600 * 1000),
+            },
+          })
+        } catch (error) {
+          console.error('Error saving Spotify profile:', error)
+          // Don't fail the sign-in, just log the error
+        }
       }
       return true
     },
