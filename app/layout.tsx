@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Pomodoro Focus - Deep Work Timer',
-  description: 'A modern Pomodoro timer with Spotify integration for focused work sessions',
+  description: 'A modern Pomodoro timer with Google sign-in for focused work sessions',
 }
 
 export default function RootLayout({

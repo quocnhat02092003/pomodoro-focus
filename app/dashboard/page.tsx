@@ -2,7 +2,6 @@
 
 import { Timer } from "@/components/pomodoro/Timer";
 import { TaskList } from "@/components/tasks/TaskList";
-import { SpotifyPlayer } from "@/components/spotify/Player";
 import { Statistics } from "@/components/dashboard/Statistics";
 import { DailyGoals } from "@/components/dashboard/DailyGoals";
 import { PomodoroHistory } from "@/components/history/PomodoroHistory";
@@ -167,9 +166,6 @@ export default function DashboardPage() {
               </div>
               <div id="break-suggestions" className="scroll-mt-8">
                 <BreakSuggestions />
-              </div>
-              <div id="spotify" className="scroll-mt-8">
-                <SpotifyPlayer />
               </div>
             </div>
           </div>

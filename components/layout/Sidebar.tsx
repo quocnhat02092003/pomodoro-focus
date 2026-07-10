@@ -13,7 +13,6 @@ import {
   Trophy,
   History,
   Settings,
-  Music,
   Wind,
   Gamepad2,
   Smile,
@@ -106,12 +105,6 @@ const menuItems: MenuItem[] = [
     section: "entertainment",
   },
   { id: "divider-2", label: "", icon: null, section: "divider" },
-  {
-    id: "spotify",
-    label: "Spotify Player",
-    icon: <Music className="w-5 h-5" />,
-    section: "media",
-  },
   {
     id: "break-suggestions",
     label: "Break Suggestions",

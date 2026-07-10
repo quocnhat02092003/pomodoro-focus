@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Music } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,12 +17,12 @@ export default function LoginPage() {
     }
   }, [status, router]);
 
-  const handleSpotifyLogin = () => {
-    signIn("spotify", { callbackUrl: "/dashboard" });
-  };
-
   const handleGoogleLogin = () => {
     signIn("google", { callbackUrl: "/dashboard" });
+  };
+
+  const handleGithubLogin = () => {
+    signIn("github", { callbackUrl: "/dashboard" });
   };
 
   const isLoading = status === "loading" || status === "authenticated";
@@ -38,32 +38,33 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-3xl">Pomodoro Focus</CardTitle>
           <p className="text-gray-400 mt-2">
-            Deep work timer with Spotify integration
+            Deep work timer with Google account sync
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
           <Button
-            onClick={handleSpotifyLogin}
+            onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-2"
             size="lg"
             disabled={isLoading}
           >
-            <Music className="w-5 h-5" />
-            Sign in with Spotify
+            <Mail className="w-5 h-5" />
+            Continue with Google
           </Button>
           <Button
-            onClick={handleGoogleLogin}
+            onClick={handleGithubLogin}
             variant="secondary"
-            className="w-full"
+            className="w-full flex items-center justify-center gap-2"
             size="lg"
             disabled={isLoading}
           >
-            Sign in with Google
+            <Github className="w-5 h-5" />
+            Continue with GitHub
           </Button>
           <p className="text-sm text-gray-500 text-center">
             {isLoading
               ? "Checking your session..."
-              : "Choose a provider to start your focus session."}
+              : "Use Google or GitHub to start your focus session."}
           </p>
         </CardContent>
       </Card>

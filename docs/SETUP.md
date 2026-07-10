@@ -3,9 +3,8 @@
 ## Prerequisites
 
 - Node.js 18+ and npm
-- PostgreSQL database
-- Spotify Developer Account (for Spotify integration)
-- Google Cloud Console project (optional, for Google OAuth)
+- MySQL database
+- Google Cloud Console project
 
 ## Installation Steps
 
@@ -25,27 +24,35 @@ cp .env.example .env
 ```
 
 Required variables:
-- `DATABASE_URL`: PostgreSQL connection string
+- `DATABASE_URL`: MySQL connection string
 - `NEXTAUTH_URL`: Your app URL (e.g., `http://localhost:3000`)
 - `NEXTAUTH_SECRET`: Generate with `openssl rand -base64 32`
-- `SPOTIFY_CLIENT_ID`: From Spotify Developer Dashboard
-- `SPOTIFY_CLIENT_SECRET`: From Spotify Developer Dashboard
+- `GOOGLE_CLIENT_ID`: From Google Cloud Console
+- `GOOGLE_CLIENT_SECRET`: From Google Cloud Console
+- `GITHUB_CLIENT_ID`: From GitHub OAuth App settings
+- `GITHUB_CLIENT_SECRET`: From GitHub OAuth App settings
 
 Optional:
-- `GOOGLE_CLIENT_ID`: For Google OAuth
-- `GOOGLE_CLIENT_SECRET`: For Google OAuth
 - `REDIS_URL`: For caching (optional)
 - `OPENAI_API_KEY`: For AI features (optional)
 
-### 3. Set Up Spotify App
+### 3. Set Up Google OAuth
 
-1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Create a new app
-3. Add redirect URI: `http://localhost:3000/api/auth/callback/spotify`
+1. Go to Google Cloud Console
+2. Create an OAuth 2.0 Client ID
+3. Add redirect URI: `http://localhost:3000/api/auth/callback/google`
 4. Copy Client ID and Client Secret to `.env`
-5. Note: For production, add production redirect URI
+5. For production, add `https://your-domain.com/api/auth/callback/google`
 
-### 4. Set Up Database
+### 4. Set Up GitHub OAuth
+
+1. Go to GitHub Developer settings
+2. Create a new OAuth App
+3. Add callback URL: `http://localhost:3000/api/auth/callback/github`
+4. Copy Client ID and Client Secret to `.env`
+5. For production, add `https://your-domain.com/api/auth/callback/github`
+
+### 5. Set Up Database
 
 ```bash
 # Generate Prisma Client
@@ -58,7 +65,7 @@ npm run db:push
 npm run db:migrate
 ```
 
-### 5. Run Development Server
+### 6. Run Development Server
 
 ```bash
 npm run dev
@@ -77,24 +84,17 @@ Visit `http://localhost:3000`
 
 ### Database Setup
 
-For production, use a managed PostgreSQL service:
-- Vercel Postgres
-- Supabase
+For production, use a managed MySQL service:
+- PlanetScale
 - Railway
 - AWS RDS
+- Aiven
 
 ### Environment Variables for Production
 
 Update `NEXTAUTH_URL` to your production domain.
 
 ## Troubleshooting
-
-### Spotify Playback Not Working
-
-- Ensure Spotify Premium account
-- Check browser console for errors
-- Verify Spotify app redirect URIs match your domain
-- Check token expiration
 
 ### Database Connection Issues
 

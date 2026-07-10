@@ -4,27 +4,6 @@ export const POMODORO_DURATIONS = {
   LONG_BREAK: 15 * 60, // 15 minutes in seconds
 } as const
 
-export const SPOTIFY_SCOPES = [
-  'user-read-playback-state',
-  'user-modify-playback-state',
-  'user-read-currently-playing',
-  'playlist-read-private',
-  'playlist-read-collaborative',
-  'user-library-read',
-] as const
-
-export const SPOTIFY_RECOMMENDED_PLAYLISTS = {
-  FOCUS: [
-    '37i9dQZF1DWWQRwui0ExPn', // Lofi Beats
-    '37i9dQZF1DWZeKCadgRdKQ', // Deep Focus
-    '37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
-  ],
-  BREAK: [
-    '37i9dQZF1DXcBWIGoYBM5M', // Chill Hits
-    '37i9dQZF1DX4sWSpwq3LiO', // Peaceful Piano
-  ],
-} as const
-
 export const ACHIEVEMENT_CODES = {
   FIRST_POMODORO: 'FIRST_POMODORO',
   STREAK_3: 'STREAK_3',

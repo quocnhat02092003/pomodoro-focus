@@ -9,12 +9,6 @@ declare module 'next-auth' {
       name?: string | null
       image?: string | null
     }
-    spotify?: {
-      id: string
-      accessToken: string
-      refreshToken: string
-      tokenExpiresAt: Date
-    }
   }
 }
 

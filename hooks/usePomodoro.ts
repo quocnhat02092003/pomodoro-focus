@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { useTimerStore } from '@/stores/timer-store'
-import { useSpotifyStore } from '@/stores/spotify-store'
 import { useSound } from './useSound'
 import { formatTime } from '@/lib/utils'
 
@@ -20,7 +19,6 @@ export function usePomodoro() {
     tick,
   } = useTimerStore()
 
-  const { autoPlay, autoPause, isPlaying, setPlaying } = useSpotifyStore()
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -67,25 +65,16 @@ export function usePomodoro() {
     }
   }, [isRunning, isPaused, tick])
 
-  // Handle completion side-effects (sound, Spotify auto-pause)
   useEffect(() => {
     if (sessionStatus !== 'COMPLETED') return
 
     playCompleteSound()
-
-    if (autoPause && isPlaying) {
-      setPlaying(false)
-    }
-  }, [sessionStatus, playCompleteSound, autoPause, isPlaying, setPlaying])
+  }, [sessionStatus, playCompleteSound])
 
   // Handle timer start
   const handleStart = (sessionId?: string) => {
     start(sessionId)
     playStartSound()
-
-    if (autoPlay && !isPlaying) {
-      setPlaying(true)
-    }
   }
 
   const handlePause = () => {

@@ -1,64 +1,63 @@
-# 🍅 Pomodoro Focus - Deep Work Timer
+# Pomodoro Focus - Deep Work Timer
 
-A modern, full-featured Pomodoro timer application with Spotify integration, task management, and analytics.
+A modern Pomodoro timer with Google sign-in, task management, relaxing sounds, and analytics.
 
-## 🚀 Features
+## Features
 
-### Core Features
-- ⏱️ **Pomodoro Timer** - Focus, Short Break, Long Break with customizable durations
-- 📋 **Task Management** - CRUD tasks with priorities, tags, deadlines, and checklists
-- 🎵 **Spotify Integration** - Play music during focus sessions with auto-play/pause
-- 📊 **Analytics** - Track your focus time with detailed statistics and charts
-- 🏆 **Gamification** - XP system, levels, streaks, and achievements
+- **Pomodoro Timer** - Focus, short break, and long break sessions with customizable durations.
+- **Task Management** - CRUD tasks with priorities, tags, deadlines, and checklists.
+- **Relaxing Sounds** - Ambient audio for focus sessions.
+- **Analytics** - Focus-time statistics and charts.
+- **Gamification** - XP, streaks, achievements, and progress tracking.
 
-### Advanced Features
-- 🧠 **Focus Mode** - Fullscreen distraction-free interface
-- 🤖 **AI Assistant** - Personalized focus recommendations
-- 🎶 **Smart Music** - Auto-switch playlists based on session type
-- 🌍 **Social** - Study rooms and shared achievements (optional)
+## Tech Stack
 
-## 🛠️ Tech Stack
-
-- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion
+- **Frontend**: Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion
 - **State Management**: Zustand
-- **Backend**: Next.js API Routes / Server Actions
-- **Database**: PostgreSQL with Prisma ORM
-- **Auth**: NextAuth.js (Spotify + Google OAuth)
-- **Music**: Spotify Web Playback SDK
+- **Backend**: Next.js API Routes
+- **Database**: Prisma ORM
+- **Auth**: NextAuth.js with Google and GitHub OAuth
+- **Audio**: Browser audio playback
 
-## 📦 Installation
+## Installation
 
-1. Clone the repository
-2. Install dependencies:
 ```bash
 npm install
-```
-
-3. Set up environment variables:
-```bash
 cp .env.example .env
-```
-
-4. Set up the database:
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-5. Run the development server:
-```bash
+npm run db:generate
+npm run db:push
 npm run dev
 ```
 
-## 🔐 Environment Variables
+## Environment Variables
 
-See `.env.example` for required environment variables.
+See `.env.example` and `docs/SETUP.md` for required environment variables.
 
-## 📚 Documentation
+Required for deploy:
 
-See `/docs` folder for detailed documentation:
-- Architecture overview
-- API documentation
-- Database schema
-- Spotify integration guide
+- `DATABASE_URL`
+- `NEXTAUTH_URL`
+- `NEXTAUTH_SECRET`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `GITHUB_CLIENT_ID`
+- `GITHUB_CLIENT_SECRET`
 
+Google OAuth callback:
+
+```text
+https://your-domain.com/api/auth/callback/google
+```
+
+GitHub OAuth callback:
+
+```text
+https://your-domain.com/api/auth/callback/github
+```
+
+## Documentation
+
+- `docs/SETUP.md`
+- `docs/API.md`
+- `docs/ARCHITECTURE.md`
+- `docs/DECISIONS.md`
