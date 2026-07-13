@@ -11,6 +11,7 @@ import { BreathingExercise } from "@/components/entertainment/BreathingExercise"
 import { MiniGames } from "@/components/entertainment/MiniGames";
 import { JokesQuotes } from "@/components/entertainment/JokesQuotes";
 import { RelaxingSounds } from "@/components/entertainment/RelaxingSounds";
+import { MusicPlayer } from "@/components/entertainment/MusicPlayer";
 import { SettingsPanel } from "@/components/settings/SettingsPanel";
 import { FocusMode } from "@/components/pomodoro/FocusMode";
 import { KeyboardShortcuts } from "@/components/ui/KeyboardShortcuts";
@@ -123,6 +124,10 @@ export default function DashboardPage() {
 
               <div id="tasks" className="scroll-mt-24">
                 <TaskList />
+              </div>
+
+              <div id="music" className="scroll-mt-24">
+                <MusicPlayer />
               </div>
 
               <div id="entertainment" className="scroll-mt-24 space-y-4">
