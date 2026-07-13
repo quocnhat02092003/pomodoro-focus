@@ -1,11 +1,19 @@
 "use client";
 
 import { usePomodoro } from "@/hooks/usePomodoro";
+import { usePictureInPicture } from "@/hooks/usePictureInPicture";
 import { useTimerStore } from "@/stores/timer-store";
 import { useUIStore } from "@/stores/ui-store";
 import { formatTime } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, SkipForward, RotateCcw, Maximize2 } from "lucide-react";
+import {
+  Play,
+  Pause,
+  SkipForward,
+  RotateCcw,
+  Maximize2,
+  PictureInPicture2,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useEffect, useState } from "react";
 
@@ -29,6 +37,11 @@ export function Timer() {
     setCurrentSessionId,
   } = useTimerStore();
   const { setFocusMode } = useUIStore();
+  const {
+    isSupported: isPipSupported,
+    isPipActive,
+    togglePip,
+  } = usePictureInPicture();
   const [progress, setProgress] = useState(0);
 
   const totalDurationMap = {
@@ -83,7 +96,7 @@ export function Timer() {
 
   const sessionColors = {
     FOCUS: {
-      bg: "bg-red-500/15 dark:bg-red-950/40",
+      bg: "bg-red-500/15 dark:bg-red-500/40",
       ring: "ring-red-500/50",
       text: "text-red-600 dark:text-red-400",
       progress: "#ef4444",
@@ -123,10 +136,11 @@ export function Timer() {
           <button
             key={type}
             onClick={() => setSessionType(type)}
-            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${sessionType === type
-              ? "bg-primary-600 text-white"
-              : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/50 dark:hover:bg-gray-700/50"
-              }`}
+            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
+              sessionType === type
+                ? "bg-primary-600 text-white"
+                : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/50 dark:hover:bg-gray-700/50"
+            }`}
           >
             {sessionLabels[type]}
           </button>
@@ -274,6 +288,23 @@ export function Timer() {
               Reset
             </Button>
           </>
+        )}
+
+        {/* Picture-in-Picture — available in every state */}
+        {isPipSupported && (
+          <Button
+            onClick={togglePip}
+            variant={isPipActive ? "secondary" : "ghost"}
+            size="lg"
+            className="flex items-center gap-2"
+            title={
+              isPipActive
+                ? "Close floating timer"
+                : "Open floating timer (Picture-in-Picture)"
+            }
+          >
+            <PictureInPicture2 className="w-5 h-5" />
+          </Button>
         )}
       </div>
     </div>

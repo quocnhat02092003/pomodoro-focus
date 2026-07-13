@@ -105,6 +105,13 @@ Complete a Pomodoro session.
 }
 ```
 
+## Picture-in-Picture
+
+Picture-in-Picture is a **client-only** feature — it has **no API endpoint or database model**.
+The floating countdown is produced entirely in the browser by rendering the timer store onto a
+`<canvas>` and streaming it into a `<video>` element via the native
+`requestPictureInPicture()` API. Full flow: [PICTURE_IN_PICTURE.md](./PICTURE_IN_PICTURE.md).
+
 ## Spotify API
 
 ### GET /api/spotify/playlists

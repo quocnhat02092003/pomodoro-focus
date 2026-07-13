@@ -44,7 +44,7 @@ export default function DashboardPage() {
           second: "2-digit",
           hour12: false,
           timeZone: "Asia/Ho_Chi_Minh",
-        }).format(new Date())
+        }).format(new Date()),
       );
     };
 
@@ -59,7 +59,10 @@ export default function DashboardPage() {
 
       <main className="min-h-screen">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 pb-10 pt-24 sm:px-6 lg:px-8 lg:pt-8">
-          <section id="dashboard" className="scroll-mt-24 rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 lg:p-6">
+          <section
+            id="dashboard"
+            className="scroll-mt-24 rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 lg:p-6"
+          >
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold text-gray-950 dark:text-white sm:text-4xl">
@@ -70,11 +73,9 @@ export default function DashboardPage() {
                 </p>
               </div>
               {isMounted && (
-                <div className="inline-flex w-fit items-center gap-2 rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-sm font-medium text-primary-700 dark:border-primary-900/60 dark:bg-primary-950/40 dark:text-primary-300">
+                <div className="inline-flex w-fit items-center gap-2 rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-sm font-medium text-primary-700 dark:border-primary-900/60 dark:bg-gray-950/40 dark:text-primary-300">
                   <CalendarDays className="h-4 w-4" />
-                  <span>
-                  Giờ Việt Nam: {vnNow}
-                  </span>
+                  <span>Giờ Việt Nam: {vnNow}</span>
                 </div>
               )}
             </div>
@@ -91,7 +92,7 @@ export default function DashboardPage() {
               </div>
 
               {selectedTask && (
-                <Card className="border-primary-200 bg-primary-50 dark:border-primary-900/60 dark:bg-primary-950/30">
+                <Card className="border-primary-200 bg-primary-50 dark:border-primary-900/60 dark:bg-gray-950/30">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Target className="w-5 h-5 text-primary-400" />

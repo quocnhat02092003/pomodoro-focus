@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Github, Mail } from "lucide-react";
+import { ArrowLeft, Github, Mail } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -28,7 +29,14 @@ export default function LoginPage() {
   const isLoading = status === "loading" || status === "authenticated";
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gray-950 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+      <Link
+        href="/"
+        className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-400 transition-colors hover:bg-gray-900 hover:text-white sm:left-6 sm:top-6"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to home
+      </Link>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">

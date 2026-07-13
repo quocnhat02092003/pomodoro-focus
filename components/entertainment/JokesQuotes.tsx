@@ -102,10 +102,11 @@ export function JokesQuotes() {
               setMode("jokes");
               setCurrentIndex(0);
             }}
-            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${mode === "jokes"
+            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${
+              mode === "jokes"
                 ? "bg-primary-600 text-white"
                 : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
+            }`}
           >
             Jokes
           </button>
@@ -114,25 +115,30 @@ export function JokesQuotes() {
               setMode("quotes");
               setCurrentIndex(0);
             }}
-            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${mode === "quotes"
+            className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors ${
+              mode === "quotes"
                 ? "bg-primary-600 text-white"
                 : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700"
-              }`}
+            }`}
           >
             Quotes
           </button>
         </div>
 
-        <div className="flex min-h-[120px] items-center justify-center rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-900/60 dark:bg-primary-950/30">
+        <div className="flex min-h-[120px] items-center justify-center rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-900/60 dark:bg-gray-950/30">
           {isJokeMode ? (
-            <p className="text-gray-800 dark:text-white text-center text-lg">{currentJoke}</p>
+            <p className="text-gray-800 dark:text-white text-center text-lg">
+              {currentJoke}
+            </p>
           ) : (
             <div className="text-center space-y-2">
               <Quote className="w-8 h-8 text-primary-400 mx-auto opacity-50" />
               <p className="text-gray-800 dark:text-white text-lg italic">
                 &quot;{currentQuote?.text}&quot;
               </p>
-              <p className="text-gray-500 dark:text-gray-400 text-sm">— {currentQuote?.author}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
+                — {currentQuote?.author}
+              </p>
             </div>
           )}
         </div>

@@ -46,7 +46,7 @@ export function Statistics() {
       <CardContent className="space-y-6">
         {/* Today's Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-lg border border-primary-200 bg-primary-50 p-4 dark:border-primary-900/60 dark:bg-primary-950/30">
+          <div className="rounded-lg border border-primary-200 bg-primary-50 p-4 dark:border-primary-900/60 dark:bg-gray-950/30">
             <div className="flex items-center gap-2 mb-2">
               <Clock className="w-4 h-4 text-primary-400" />
               <p className="text-xs text-gray-500 dark:text-gray-400">Today</p>
@@ -54,13 +54,17 @@ export function Statistics() {
             <p className="text-2xl font-bold text-gray-800 dark:text-white">
               {stats.todayPomodoros}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">pomodoros</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              pomodoros
+            </p>
           </div>
 
           <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-900/60 dark:bg-green-950/30">
             <div className="flex items-center gap-2 mb-2">
               <Clock className="w-4 h-4 text-green-400" />
-              <p className="text-xs text-gray-500 dark:text-gray-400">Focus Time</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Focus Time
+              </p>
             </div>
             <p className="text-2xl font-bold text-gray-800 dark:text-white">
               {stats.todayFocusMinutes}
@@ -75,14 +79,18 @@ export function Statistics() {
             <div className="flex items-center gap-2">
               <Flame className="w-5 h-5 text-orange-400" />
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Current Streak</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Current Streak
+                </p>
                 <p className="text-2xl font-bold text-gray-800 dark:text-white">
                   {stats.streak} days
                 </p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Keep it up!</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Keep it up!
+              </p>
             </div>
           </div>
         </div>
@@ -92,7 +100,9 @@ export function Statistics() {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <Target className="w-4 h-4 text-primary-400" />
-              <p className="text-sm text-gray-500 dark:text-gray-400">Weekly Goal</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Weekly Goal
+              </p>
             </div>
             <p className="text-sm font-medium text-gray-800 dark:text-white">
               {stats.weeklyCompleted} / {stats.weeklyGoal}

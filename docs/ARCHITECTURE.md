@@ -29,6 +29,12 @@
    - Tab switching detection
    - Lock mode
 
+2. **Picture-in-Picture (PiP)**
+   - Floating always-on-top countdown window
+   - Canvas → captureStream → `<video>.requestPictureInPicture()`
+   - Stays accurate while the tab is hidden
+   - Client-only (no API/model). See [PICTURE_IN_PICTURE.md](./PICTURE_IN_PICTURE.md)
+
 2. **Analytics**
    - Daily/weekly/monthly stats
    - Charts (line, bar, heatmap)

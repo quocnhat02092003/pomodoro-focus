@@ -26,10 +26,12 @@ export function FocusMode() {
     LONG_BREAK: "bg-blue-50",
   };
 
+  // Near-black backgrounds with only a faint session-color tint — much easier
+  // on the eyes than the fully-saturated *-950 washes in dark mode.
   const sessionColorsDark = {
-    FOCUS: "dark:bg-red-950",
-    SHORT_BREAK: "dark:bg-green-950",
-    LONG_BREAK: "dark:bg-blue-950",
+    FOCUS: "dark:bg-[#160f11]",
+    SHORT_BREAK: "dark:bg-[#0e1512]",
+    LONG_BREAK: "dark:bg-[#0d1119]",
   };
 
   return (
