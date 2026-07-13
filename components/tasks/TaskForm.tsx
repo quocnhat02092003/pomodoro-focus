@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import { Task } from "@/types/task";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { X, Save } from "lucide-react";
+import { X, Save, Loader2 } from "lucide-react";
 import { PRIORITY_COLORS } from "@/lib/constants";
-import { useTaskStore } from "@/stores/task-store";
 
 interface TaskFormProps {
   task?: Task | null;
@@ -23,7 +22,7 @@ export function TaskForm({ task, onClose, onSave }: TaskFormProps) {
   >("MEDIUM");
   const [estimatedPomodoros, setEstimatedPomodoros] = useState(1);
   const [dueDate, setDueDate] = useState("");
-  const { setLoading } = useTaskStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (task) {
@@ -39,7 +38,8 @@ export function TaskForm({ task, onClose, onSave }: TaskFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
       const url = task ? `/api/tasks/${task.id}` : "/api/tasks";
@@ -69,7 +69,7 @@ export function TaskForm({ task, onClose, onSave }: TaskFormProps) {
     } catch (error) {
       console.error("Error saving task:", error);
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -169,12 +169,30 @@ export function TaskForm({ task, onClose, onSave }: TaskFormProps) {
               </div>
 
               <div className="flex flex-wrap justify-end gap-3 pt-4">
-                <Button type="button" onClick={onClose} variant="ghost">
+                <Button
+                  type="button"
+                  onClick={onClose}
+                  variant="ghost"
+                  disabled={isSubmitting}
+                >
                   Cancel
                 </Button>
-                <Button type="submit" className="flex items-center gap-2">
-                  <Save className="w-4 h-4" />
-                  {task ? "Update" : "Create"} Task
+                <Button
+                  type="submit"
+                  className="flex items-center gap-2"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {task ? "Updating..." : "Creating..."}
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      {task ? "Update" : "Create"} Task
+                    </>
+                  )}
                 </Button>
               </div>
             </form>

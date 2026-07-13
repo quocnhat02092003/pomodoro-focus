@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { ArrowLeft, Github, Mail } from "lucide-react";
+import { ArrowLeft, Github, Loader2, Mail } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const { status } = useSession();
+  const [pendingProvider, setPendingProvider] = useState<
+    "google" | "github" | null
+  >(null);
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -19,14 +22,17 @@ export default function LoginPage() {
   }, [status, router]);
 
   const handleGoogleLogin = () => {
+    setPendingProvider("google");
     signIn("google", { callbackUrl: "/dashboard" });
   };
 
   const handleGithubLogin = () => {
+    setPendingProvider("github");
     signIn("github", { callbackUrl: "/dashboard" });
   };
 
-  const isLoading = status === "loading" || status === "authenticated";
+  const isLoading =
+    status === "loading" || status === "authenticated" || pendingProvider !== null;
 
   return (
     <div className="relative min-h-screen bg-gray-950 flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
@@ -56,8 +62,14 @@ export default function LoginPage() {
             size="lg"
             disabled={isLoading}
           >
-            <Mail className="w-5 h-5" />
-            Continue with Google
+            {pendingProvider === "google" ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Mail className="w-5 h-5" />
+            )}
+            {pendingProvider === "google"
+              ? "Connecting to Google..."
+              : "Continue with Google"}
           </Button>
           <Button
             onClick={handleGithubLogin}
@@ -66,13 +78,21 @@ export default function LoginPage() {
             size="lg"
             disabled={isLoading}
           >
-            <Github className="w-5 h-5" />
-            Continue with GitHub
+            {pendingProvider === "github" ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Github className="w-5 h-5" />
+            )}
+            {pendingProvider === "github"
+              ? "Connecting to GitHub..."
+              : "Continue with GitHub"}
           </Button>
           <p className="text-sm text-gray-500 text-center">
-            {isLoading
-              ? "Checking your session..."
-              : "Use Google or GitHub to start your focus session."}
+            {pendingProvider
+              ? "Redirecting to sign in..."
+              : isLoading
+                ? "Checking your session..."
+                : "Use Google or GitHub to start your focus session."}
           </p>
         </CardContent>
       </Card>

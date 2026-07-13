@@ -25,6 +25,7 @@ import {
   ChevronRight,
   LogOut,
   LogIn,
+  Loader2,
 } from "lucide-react";
 import { useUIStore } from "@/stores/ui-store";
 import { Button } from "@/components/ui/Button";
@@ -131,9 +132,11 @@ export function Sidebar() {
   const { sidebarOpen, setSettingsOpen, setSidebarOpen } = useUIStore();
   const [activeSection, setActiveSection] = useState<string>("dashboard");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const isAuthenticated = Boolean(session);
+  const isSessionLoading = status === "loading";
 
   const sanitizedName = session?.user?.name?.trim() ?? "";
   const displayName =
@@ -147,9 +150,14 @@ export function Sidebar() {
   const authLabel = isAuthenticated ? "Logout" : "Login";
   const authTitle = isAuthenticated ? "Sign out" : "Sign in";
 
-  const handleAuthAction = () => {
+  const handleAuthAction = async () => {
     if (isAuthenticated) {
-      signOut({ callbackUrl: "/dashboard" });
+      setIsLoggingOut(true);
+      try {
+        await signOut({ callbackUrl: "/dashboard" });
+      } catch {
+        setIsLoggingOut(false);
+      }
       return;
     }
     router.push("/login");
@@ -198,6 +206,21 @@ export function Sidebar() {
 
   return (
     <>
+      {/* Logout progress overlay */}
+      <AnimatePresence>
+        {isLoggingOut && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-3 bg-gray-950/70 backdrop-blur-sm"
+          >
+            <Loader2 className="w-8 h-8 text-white animate-spin" />
+            <p className="text-sm font-medium text-white">Đang đăng xuất...</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Mobile Menu Button */}
       <Button
         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -337,39 +360,63 @@ export function Sidebar() {
             {/* Footer */}
             {!isCollapsed && (
               <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex-shrink-0 space-y-4">
-                <div className="flex items-center gap-3">
-                  {profileImage ? (
-                    <Image
-                      src={profileImage}
-                      alt={displayName}
-                      width={40}
-                      height={40}
-                      className="w-10 h-10 rounded-full object-cover border border-gray-300 dark:border-gray-700"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold">
-                      {userInitial}
+                {isSessionLoading ? (
+                  <div className="flex items-center gap-3 animate-pulse">
+                    <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800" />
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <div className="h-3.5 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
+                      <div className="h-3 w-1/2 rounded bg-gray-200 dark:bg-gray-800" />
                     </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 dark:text-white truncate">
-                      {displayName}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                      {userEmail}
-                    </p>
                   </div>
-                </div>
-                <Button
-                  onClick={handleAuthAction}
-                  variant="ghost"
-                  size="sm"
-                  className="w-full flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                  title={authTitle}
-                >
-                  <AuthIcon className="w-4 h-4 mr-2" />
-                  {authLabel}
-                </Button>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    {profileImage ? (
+                      <Image
+                        src={profileImage}
+                        alt={displayName}
+                        width={40}
+                        height={40}
+                        className="w-10 h-10 rounded-full object-cover border border-gray-300 dark:border-gray-700"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-semibold">
+                        {userInitial}
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-800 dark:text-white truncate">
+                        {displayName}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        {userEmail}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {isSessionLoading ? (
+                  <div className="h-9 w-full rounded-md bg-gray-200 dark:bg-gray-800 animate-pulse" />
+                ) : (
+                  <Button
+                    onClick={handleAuthAction}
+                    variant="ghost"
+                    size="sm"
+                    disabled={isLoggingOut}
+                    className="w-full flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white disabled:opacity-60"
+                    title={authTitle}
+                  >
+                    {isLoggingOut ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Đang đăng xuất...
+                      </>
+                    ) : (
+                      <>
+                        <AuthIcon className="w-4 h-4 mr-2" />
+                        {authLabel}
+                      </>
+                    )}
+                  </Button>
+                )}
                 <div className="text-xs text-gray-400 dark:text-gray-500 text-center">
                   Version 1.0.0
                 </div>
@@ -392,10 +439,15 @@ export function Sidebar() {
                   onClick={handleAuthAction}
                   variant="ghost"
                   size="sm"
-                  className="w-full justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                  title={authTitle}
+                  disabled={isLoggingOut || isSessionLoading}
+                  className="w-full justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white disabled:opacity-60"
+                  title={isLoggingOut ? "Đang đăng xuất..." : authTitle}
                 >
-                  <AuthIcon className="w-4 h-4" />
+                  {isLoggingOut || isSessionLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <AuthIcon className="w-4 h-4" />
+                  )}
                 </Button>
               </div>
             )}
