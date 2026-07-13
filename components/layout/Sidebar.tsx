@@ -203,7 +203,7 @@ export function Sidebar() {
         onClick={() => setSidebarOpen(!sidebarOpen)}
         variant="ghost"
         className={cn(
-          "fixed left-4 top-4 z-30 h-11 w-11 items-center justify-center border border-gray-200 bg-white p-0 text-gray-800 shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white lg:hidden",
+          "fixed left-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200/80 bg-white/90 p-0 text-gray-800 shadow-lg backdrop-blur-md hover:bg-gray-100 dark:border-gray-700/80 dark:bg-gray-900/90 dark:text-white dark:hover:bg-gray-800 lg:hidden",
           sidebarOpen && "hidden"
         )}
         size="sm"
