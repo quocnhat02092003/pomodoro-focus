@@ -2,12 +2,14 @@ import { create } from 'zustand'
 
 interface UIState {
   focusMode: boolean
+  settingsOpen: boolean
   sidebarOpen: boolean
   theme: 'light' | 'dark'
   
   // Actions
   toggleFocusMode: () => void
   setFocusMode: (enabled: boolean) => void
+  setSettingsOpen: (open: boolean) => void
   toggleSidebar: () => void
   setSidebarOpen: (open: boolean) => void
   setTheme: (theme: 'light' | 'dark') => void
@@ -15,6 +17,7 @@ interface UIState {
 
 export const useUIStore = create<UIState>((set) => ({
   focusMode: false,
+  settingsOpen: false,
   sidebarOpen: false, // Will be set based on screen size in component
   theme: 'dark',
 
@@ -36,6 +39,8 @@ export const useUIStore = create<UIState>((set) => ({
         sidebarOpen: enabled ? false : isDesktop,
       }
     }),
+
+  setSettingsOpen: (open) => set({ settingsOpen: open }),
 
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 

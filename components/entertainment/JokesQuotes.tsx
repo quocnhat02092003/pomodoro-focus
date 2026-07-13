@@ -123,7 +123,7 @@ export function JokesQuotes() {
           </button>
         </div>
 
-        <div className="min-h-[120px] flex items-center justify-center p-6 bg-gradient-to-br from-primary-500/10 to-purple-500/10 rounded-lg border border-primary-500/20">
+        <div className="flex min-h-[120px] items-center justify-center rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-900/60 dark:bg-primary-950/30">
           {isJokeMode ? (
             <p className="text-gray-800 dark:text-white text-center text-lg">{currentJoke}</p>
           ) : (

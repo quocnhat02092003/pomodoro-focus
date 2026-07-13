@@ -68,7 +68,7 @@ export function Achievements() {
             <div
               key={achievement.code}
               className={`p-4 rounded-lg border transition-all ${achievement.unlocked
-                  ? "bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-yellow-500/30"
+                  ? "bg-yellow-50 border-yellow-300 dark:bg-yellow-950/30 dark:border-yellow-700/50"
                   : "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 opacity-60"
                 }`}
             >

@@ -121,7 +121,7 @@ const menuItems: MenuItem[] = [
 ];
 
 export function Sidebar() {
-  const { sidebarOpen, setSidebarOpen } = useUIStore();
+  const { sidebarOpen, setSettingsOpen, setSidebarOpen } = useUIStore();
   const [activeSection, setActiveSection] = useState<string>("dashboard");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const router = useRouter();
@@ -169,6 +169,14 @@ export function Sidebar() {
 
     setActiveSection(itemId);
 
+    if (itemId === "settings") {
+      setSettingsOpen(true);
+      if (window.innerWidth < 1024) {
+        setSidebarOpen(false);
+      }
+      return;
+    }
+
     // Scroll to section
     const element = document.getElementById(itemId);
     if (element) {
@@ -187,8 +195,12 @@ export function Sidebar() {
       <Button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         variant="ghost"
-        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 lg:hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm"
+        className={cn(
+          "fixed left-4 top-4 z-30 h-11 w-11 items-center justify-center border border-gray-200 bg-white p-0 text-gray-800 shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-white lg:hidden",
+          sidebarOpen && "hidden"
+        )}
         size="sm"
+        aria-label="Open menu"
       >
         <Menu className="w-5 h-5" />
       </Button>
@@ -217,7 +229,7 @@ export function Sidebar() {
             exit={{ x: -300 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className={cn(
-              "fixed left-0 top-0 h-screen bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-r border-gray-200 dark:border-gray-800 z-50 flex flex-col",
+              "fixed left-0 top-0 z-50 flex h-screen max-w-[calc(100vw-2rem)] flex-col border-r border-gray-200 bg-white shadow-xl dark:border-gray-800 dark:bg-gray-900",
               "lg:translate-x-0",
               isCollapsed ? "w-20" : "w-72"
             )}

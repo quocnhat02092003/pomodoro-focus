@@ -45,7 +45,7 @@ export function DailyGoals() {
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
             <div
-              className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-500"
+              className="h-2 rounded-full bg-primary-600 transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>

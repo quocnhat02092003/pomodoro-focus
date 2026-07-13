@@ -83,19 +83,19 @@ export function Timer() {
 
   const sessionColors = {
     FOCUS: {
-      bg: "from-red-500/20 to-orange-500/20",
+      bg: "bg-red-500/15 dark:bg-red-950/40",
       ring: "ring-red-500/50",
       text: "text-red-600 dark:text-red-400",
       progress: "#ef4444",
     },
     SHORT_BREAK: {
-      bg: "from-green-500/20 to-emerald-500/20",
+      bg: "bg-green-500/15 dark:bg-green-950/40",
       ring: "ring-green-500/50",
       text: "text-green-600 dark:text-green-400",
       progress: "#10b981",
     },
     LONG_BREAK: {
-      bg: "from-blue-500/20 to-cyan-500/20",
+      bg: "bg-blue-500/15 dark:bg-blue-950/40",
       ring: "ring-blue-500/50",
       text: "text-blue-600 dark:text-blue-400",
       progress: "#3b82f6",
@@ -118,13 +118,13 @@ export function Timer() {
   return (
     <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8 w-full">
       {/* Session Type Selector */}
-      <div className="flex flex-wrap justify-center gap-2 bg-gray-300/50 dark:bg-gray-800/50 p-1 rounded-xl w-full sm:w-auto">
+      <div className="grid w-full grid-cols-1 gap-2 rounded-lg bg-gray-100 p-1 dark:bg-gray-800 sm:w-auto sm:grid-cols-3">
         {(["FOCUS", "SHORT_BREAK", "LONG_BREAK"] as const).map((type) => (
           <button
             key={type}
             onClick={() => setSessionType(type)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${sessionType === type
-              ? "bg-primary-600 text-white shadow-lg shadow-primary-600/50"
+            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${sessionType === type
+              ? "bg-primary-600 text-white"
               : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-300/50 dark:hover:bg-gray-700/50"
               }`}
           >
@@ -137,7 +137,7 @@ export function Timer() {
       <div className="w-full flex items-center justify-center">
         <div className="relative inline-flex">
           <div
-            className={`relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full bg-gradient-to-br ${currentColor.bg} p-3 sm:p-4`}
+            className={`relative h-64 w-64 rounded-full ${currentColor.bg} p-3 sm:h-72 sm:w-72 sm:p-4 lg:h-80 lg:w-80`}
           >
             <svg
               className="transform -rotate-90 w-full h-full"
@@ -179,7 +179,7 @@ export function Timer() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className={`text-6xl font-bold ${currentColor.text} mb-2`}
+                  className={`mb-2 text-5xl font-bold ${currentColor.text} sm:text-6xl`}
                 >
                   {formatTime(timeRemaining)}
                 </motion.div>
@@ -216,7 +216,7 @@ export function Timer() {
             <Button
               onClick={handleStart}
               size="lg"
-              className="flex items-center gap-2 px-8 shadow-lg shadow-primary-600/50 hover:shadow-primary-600/70"
+              className="flex items-center gap-2 px-8"
             >
               <Play className="w-5 h-5" />
               Start
@@ -250,7 +250,7 @@ export function Timer() {
             <Button
               onClick={handleResume}
               size="lg"
-              className="flex items-center gap-2 px-8 shadow-lg shadow-primary-600/50"
+              className="flex items-center gap-2 px-8"
             >
               <Play className="w-5 h-5" />
               Resume

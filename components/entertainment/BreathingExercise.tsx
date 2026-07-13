@@ -80,15 +80,15 @@ export function BreathingExercise() {
   const getPhaseColor = () => {
     switch (phase) {
       case 'inhale':
-        return 'from-blue-500 to-cyan-500'
+        return 'bg-blue-500'
       case 'hold':
-        return 'from-purple-500 to-pink-500'
+        return 'bg-purple-500'
       case 'exhale':
-        return 'from-orange-500 to-red-500'
+        return 'bg-orange-500'
       case 'rest':
-        return 'from-gray-500 to-gray-600'
+        return 'bg-gray-500'
       default:
-        return 'from-blue-500 to-cyan-500'
+        return 'bg-blue-500'
     }
   }
 
@@ -144,7 +144,7 @@ export function BreathingExercise() {
               duration: config[phase],
               ease: phase === 'inhale' ? 'easeOut' : phase === 'exhale' ? 'easeIn' : 'linear',
             }}
-            className={`w-48 h-48 rounded-full bg-gradient-to-br ${getPhaseColor()} flex items-center justify-center shadow-lg`}
+            className={`flex h-48 w-48 items-center justify-center rounded-full ${getPhaseColor()} shadow-lg`}
           >
             <div className="text-center">
               <p className="text-white text-4xl font-bold mb-2">{isActive ? countdown : '—'}</p>

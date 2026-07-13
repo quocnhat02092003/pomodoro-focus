@@ -7,6 +7,7 @@ import { Modal } from "@/components/ui/Modal";
 import { ThemeSwitch } from "@/components/ui/ThemeSwitch";
 import { Settings, Volume2, Bell, Clock, Zap, Palette } from "lucide-react";
 import { useTimerStore } from "@/stores/timer-store";
+import { useUIStore } from "@/stores/ui-store";
 import { useSound } from "@/hooks/useSound";
 
 interface SettingsData {
@@ -20,7 +21,7 @@ interface SettingsData {
 }
 
 export function SettingsPanel() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { settingsOpen, setSettingsOpen } = useUIStore();
   const [settings, setSettings] = useState<SettingsData>({
     focusDuration: 25,
     shortBreakDuration: 5,
@@ -69,7 +70,7 @@ export function SettingsPanel() {
 
   const handleSave = () => {
     localStorage.setItem("pomodoro-settings", JSON.stringify(settings));
-    setIsOpen(false);
+    setSettingsOpen(false);
     if (settings.soundEnabled) {
       playNotification("complete");
     }
@@ -84,7 +85,7 @@ export function SettingsPanel() {
   return (
     <>
       <Button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setSettingsOpen(true)}
         variant="ghost"
         className="fixed bottom-6 right-6 z-40 rounded-full w-14 h-14 shadow-lg bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
         title="Settings"
@@ -93,8 +94,8 @@ export function SettingsPanel() {
       </Button>
 
       <Modal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        isOpen={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
         title="Settings"
         size="lg"
       >
@@ -268,7 +269,7 @@ export function SettingsPanel() {
           </div>
 
           <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
-            <Button onClick={() => setIsOpen(false)} variant="ghost">
+            <Button onClick={() => setSettingsOpen(false)} variant="ghost">
               Cancel
             </Button>
             <Button onClick={handleSave}>Save Settings</Button>

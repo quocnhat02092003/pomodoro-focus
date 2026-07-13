@@ -20,18 +20,16 @@ export function FocusMode() {
 
   if (!focusMode) return null;
 
-  // Light mode colors (brighter, softer gradients)
   const sessionColorsLight = {
-    FOCUS: "from-red-100 via-orange-50 to-slate-100",
-    SHORT_BREAK: "from-green-100 via-emerald-50 to-slate-100",
-    LONG_BREAK: "from-blue-100 via-cyan-50 to-slate-100",
+    FOCUS: "bg-red-50",
+    SHORT_BREAK: "bg-green-50",
+    LONG_BREAK: "bg-blue-50",
   };
 
-  // Dark mode colors (darker, richer gradients)
   const sessionColorsDark = {
-    FOCUS: "dark:from-red-950 dark:via-gray-950 dark:to-gray-950",
-    SHORT_BREAK: "dark:from-green-950 dark:via-gray-950 dark:to-gray-950",
-    LONG_BREAK: "dark:from-blue-950 dark:via-gray-950 dark:to-gray-950",
+    FOCUS: "dark:bg-red-950",
+    SHORT_BREAK: "dark:bg-green-950",
+    LONG_BREAK: "dark:bg-blue-950",
   };
 
   return (
@@ -41,7 +39,7 @@ export function FocusMode() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className={`fixed inset-0 z-50 bg-gradient-to-br ${sessionColorsLight[sessionType]} ${sessionColorsDark[sessionType]} flex items-center justify-center`}
+          className={`fixed inset-0 z-50 flex items-center justify-center ${sessionColorsLight[sessionType]} ${sessionColorsDark[sessionType]}`}
         >
           {/* Exit button */}
           <Button

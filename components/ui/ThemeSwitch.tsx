@@ -45,8 +45,8 @@ export function ThemeSwitch({ showLabel = true }: ThemeSwitchProps) {
           transition-all duration-300 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900
           ${isDark
-                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600'
-                        : 'bg-gradient-to-r from-yellow-400 to-orange-400'
+                        ? 'bg-indigo-600'
+                        : 'bg-yellow-400'
                     }
         `}
                 aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}

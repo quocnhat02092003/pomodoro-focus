@@ -5,8 +5,7 @@
 /* Light mode variables - darker for better visibility */
 :root {
   --foreground-rgb: 17, 24, 39;
-  --background-start-rgb: 241, 245, 249;
-  --background-end-rgb: 226, 232, 240;
+  --background-rgb: 241, 245, 249;
   --card-bg: 255, 255, 255;
   --card-border: 203, 213, 225;
   --input-bg: 241, 245, 249;
@@ -16,8 +15,7 @@
 /* Dark mode variables */
 .dark {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 3, 7, 18;
-  --background-end-rgb: 17, 24, 39;
+  --background-rgb: 3, 7, 18;
   --card-bg: 31, 41, 55;
   --card-border: 55, 65, 81;
   --input-bg: 31, 41, 55;
@@ -26,9 +24,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -92,11 +88,6 @@ body {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-/* Gradient text */
-.gradient-text {
-  @apply bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
 }
 
 /* Pulse animation for notifications */
